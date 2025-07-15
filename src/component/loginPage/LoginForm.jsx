@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import ModalsLogin from '../modals/ModalsLogin';
+import { useNavigate } from 'react-router-dom';
 
 const initialField = {
   username: '',
@@ -10,6 +11,7 @@ const initialField = {
 const LoginForm = () => {
   const [field, setField] = useState(initialField);
   const [found, setFound] = useState(true);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,6 +34,7 @@ const LoginForm = () => {
       );
       if (findUsers) {
         setFound(true);
+        navigate('/dashboard');
       } else {
         setFound(false);
       }
