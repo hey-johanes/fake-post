@@ -7,7 +7,7 @@ const initialField = {
   post: '',
 };
 
-export default function ModalsAddPost({ show, setShow }) {
+export default function ModalsAddPost({ show, setShow, onsuccessAddData }) {
   const [field, setField] = useState(initialField);
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,6 +18,7 @@ export default function ModalsAddPost({ show, setShow }) {
       e.preventDefault();
       await axios.post('http://localhost:1234/post', field);
       setField(initialField);
+      onsuccessAddData();
       setShow(false);
     } catch (error) {
       console.log(error);

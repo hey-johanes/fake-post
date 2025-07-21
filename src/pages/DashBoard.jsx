@@ -9,21 +9,27 @@ import CardItem from '../component/card/CardItem';
 function DashBoard() {
   const [showModal, SetShowModal] = useState(false);
   const [datas, setDatas] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:1234/post');
+      setDatas(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:1234/post');
-        setDatas(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchData();
-  });
+  }, []);
   return (
     <div>
       {showModal ? (
-        <ModalsAddPost show={showModal} setShow={SetShowModal} />
+        <ModalsAddPost
+          show={showModal}
+          setShow={SetShowModal}
+          onsuccessAddData={fetchData}
+        />
       ) : (
         <></>
       )}
