@@ -1,14 +1,4 @@
 {
-  "user": [
-    {
-      "id": "c968",
-      "username": "admin",
-      "password": "admin"
-    },
-    {
-      "id": "02db",
-      "username": "budi",
-      "password": "budi"
-    }
-  ]
+  "user": [],
+  "post": []
 }
