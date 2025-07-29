@@ -1,3 +1,4 @@
+import { Trash } from 'lucide-react';
 import {
   Card,
   CardBody,
@@ -6,12 +7,13 @@ import {
   CardTitle,
 } from 'react-bootstrap';
 
-export default function CardItem({ username, post }) {
+export default function CardItem({ id, username, post, deleteData }) {
   return (
     <div className="col-md-4 mb-4">
       <Card>
-        <CardHeader>
-          <CardTitle>{username}</CardTitle>
+        <CardHeader className="row">
+          <CardTitle className="col-10">{username}</CardTitle>
+          <Trash className="col" onClick={() => deleteData(id)} />
         </CardHeader>
         <CardBody>
           <CardText>{post}</CardText>
