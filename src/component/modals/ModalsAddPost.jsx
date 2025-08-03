@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Modal, Button, Form, FormGroup } from 'react-bootstrap';
+import { useAuthContext } from '../../context/AuthContext';
 
 const initialField = {
   username: '',
@@ -9,9 +10,15 @@ const initialField = {
 
 export default function ModalsAddPost({ show, setShow, onsuccessAddData }) {
   const [field, setField] = useState(initialField);
+  const { user } = useAuthContext();
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setField({ ...field, [name]: value });
+    setField({
+      ...field,
+      [name]: value,
+      userId: user.id,
+      username: user.username,
+    });
   };
   const handleSubmit = async (e) => {
     try {
@@ -37,12 +44,11 @@ export default function ModalsAddPost({ show, setShow, onsuccessAddData }) {
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
-                name="username"
-                value={field.username}
+                value={user.username}
                 placeholder="Input username"
                 maxLength={20}
                 onChange={handleChange}
-                required
+                disabled
               ></Form.Control>
             </FormGroup>
             <FormGroup>
