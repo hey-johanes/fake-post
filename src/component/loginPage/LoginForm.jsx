@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import ModalsLogin from '../modals/ModalsLogin';
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../context/AuthContext';
 
 const initialField = {
   username: '',
@@ -12,6 +13,8 @@ const LoginForm = () => {
   const [field, setField] = useState(initialField);
   const [found, setFound] = useState(true);
   const navigate = useNavigate();
+
+  const { login } = useAuthContext();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,21 +28,20 @@ const LoginForm = () => {
   async function handleLogin(e) {
     e.preventDefault();
     try {
-      const response = await axios.get('http://localhost:1234/user');
-      const users = response.data;
-
-      const findUsers = users.find(
-        (data) =>
-          data.username === field.username && data.password === field.password
+      const response = await axios.get(
+        `http://localhost:1234/user?username=${field.username}&password=${field.password}`
       );
+      const findUsers = response.data[0];
       if (findUsers) {
         setFound(true);
+        login(findUsers);
         navigate('/dashboard');
       } else {
         setFound(false);
       }
     } catch (error) {
       console.log(error);
+      setFound(false);
     }
   }
   const handleClose = () => {
