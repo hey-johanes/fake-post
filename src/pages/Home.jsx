@@ -1,34 +1,16 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import CardItem from '../component/card/CardItem';
 import ModalsAddPost from '../component/modals/ModalsAddPost';
+import { useCardContext } from '../context/CardContext';
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
-  const [datas, setDatas] = useState([]);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('http://localhost:1234/post');
-      setDatas(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deleteData = async (id) => {
-    try {
-      await axios.delete(`http://localhost:1234/post/${id}`);
-      fetchData();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { datas, deleteData, fetchData } = useCardContext();
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <div>
