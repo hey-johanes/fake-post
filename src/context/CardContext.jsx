@@ -31,6 +31,15 @@ export function CardProvider({ children }) {
     }
   }, [user]);
 
+  const deleteDataOnSOcialPage = async (id) => {
+    try {
+      await axios.delete(`http://localhost:1234/post/${id}`);
+      fetchDataAll();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const deleteData = async (id) => {
     try {
       await axios.delete(`http://localhost:1234/post/${id}`);
@@ -46,6 +55,7 @@ export function CardProvider({ children }) {
     deleteData,
     fetchData,
     fetchDataAll,
+    deleteDataOnSOcialPage,
   };
 
   return <CardContext.Provider value={value}>{children}</CardContext.Provider>;

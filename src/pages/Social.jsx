@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import CardItem from '../component/card/CardItem';
 import { useCardContext } from '../context/CardContext';
+import CardItemSocial from '../component/card/CardItemSocial';
 
 export default function Features() {
-  const { fetchDataAll, datas, deleteData } = useCardContext();
+  const { fetchDataAll, datas, deleteDataOnSOcialPage } = useCardContext();
 
   useEffect(() => {
     fetchDataAll();
@@ -14,12 +14,12 @@ export default function Features() {
       <div className="m-5 container">
         <div className="row">
           {datas.map((data) => (
-            <CardItem
+            <CardItemSocial
               key={data.id}
               id={data.id}
               username={data.username}
               post={data.post}
-              deleteData={deleteData}
+              deleteData={deleteDataOnSOcialPage}
             />
           ))}
         </div>
