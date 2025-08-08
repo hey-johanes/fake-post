@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useContext, createContext, useState, useCallback } from 'react';
 import { useAuthContext } from './AuthContext';
+import { POST_URL } from '../config/config';
 
 const CardContext = createContext();
 
@@ -12,9 +13,7 @@ export function CardProvider({ children }) {
   const fetchData = useCallback(async () => {
     if (!user) return;
     try {
-      const response = await axios.get(
-        `http://localhost:1234/post?userId=${user.id}`
-      );
+      const response = await axios.get(`${POST_URL}?userId=${user.id}`);
       setDatas(response.data);
     } catch (error) {
       console.log(error);
@@ -24,7 +23,7 @@ export function CardProvider({ children }) {
   const fetchDataAll = useCallback(async () => {
     if (!user) return;
     try {
-      const response = await axios.get(`http://localhost:1234/post`);
+      const response = await axios.get(POST_URL);
       setDatas(response.data);
     } catch (error) {
       console.log(error);
@@ -33,7 +32,7 @@ export function CardProvider({ children }) {
 
   const deleteDataOnSOcialPage = async (id) => {
     try {
-      await axios.delete(`http://localhost:1234/post/${id}`);
+      await axios.delete(`${POST_URL}/${id}`);
       fetchDataAll();
     } catch (error) {
       console.log(error);
@@ -42,7 +41,7 @@ export function CardProvider({ children }) {
 
   const deleteData = async (id) => {
     try {
-      await axios.delete(`http://localhost:1234/post/${id}`);
+      await axios.delete(`${POST_URL}/${id}`);
       fetchData();
     } catch (error) {
       console.log(error);

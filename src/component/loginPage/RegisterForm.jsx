@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { USER_URL } from '../../config/config';
 
 const initialField = {
   username: '',
@@ -21,7 +22,7 @@ const RegisterForm = ({ triggerButton }) => {
     e.preventDefault();
     delete field.confirmPassword;
     triggerButton();
-    await axios.post('http://localhost:1234/user', field);
+    await axios.post(USER_URL, field);
     setField(initialField);
   };
 
