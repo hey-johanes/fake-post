@@ -30,7 +30,7 @@ export function CardProvider({ children }) {
     }
   }, [user]);
 
-  const deleteDataOnSOcialPage = async (id) => {
+  const deleteDataSocialById = async (id) => {
     try {
       await axios.delete(`${POST_URL}/${id}`);
       fetchDataAll();
@@ -39,7 +39,7 @@ export function CardProvider({ children }) {
     }
   };
 
-  const deleteData = async (id) => {
+  const deletebyId = async (id) => {
     try {
       await axios.delete(`${POST_URL}/${id}`);
       getDataById();
@@ -48,13 +48,22 @@ export function CardProvider({ children }) {
     }
   };
 
+  const editById = async (id, data) => {
+    try {
+      await axios.patch(`${POST_URL}/${id}`, data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const value = {
     datas,
     setDatas,
-    deleteData,
+    deletebyId,
     getDataById,
     fetchDataAll,
-    deleteDataOnSOcialPage,
+    deleteDataSocialById,
+    editById,
   };
 
   return <CardContext.Provider value={value}>{children}</CardContext.Provider>;
