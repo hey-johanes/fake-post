@@ -1,8 +1,11 @@
 import { Button, Modal } from 'react-bootstrap';
-import { useCardContext } from '../../context/CardContext';
 
-export default function ModalsDeletePost({ show, handleClose, id }) {
-  const { deletebyId } = useCardContext();
+export default function ModalsDeletePost({
+  show,
+  handleClose,
+  id,
+  deletebyId,
+}) {
   return (
     <>
       <Modal show={show} onHide={show} backdrop="static" keyboard={false}>

@@ -16,14 +16,14 @@ export default function CardItemSocial({ id, username, post }) {
   const { user } = useAuthContext();
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
-  const { deleteDataSocialById } = useCardContext();
+  const { deleteDataSocialById, editDataSocialById } = useCardContext();
   return (
     <div className="col-md-4 mb-4">
       {showModalDelete ? (
         <ModalsDeletePost
           show={showModalDelete}
           handleClose={setShowModalDelete}
-          deleteData={deleteDataSocialById}
+          deletebyId={deleteDataSocialById}
           id={id}
         />
       ) : (
@@ -34,8 +34,9 @@ export default function CardItemSocial({ id, username, post }) {
           show={showModalEdit}
           setShowModalEdit={setShowModalEdit}
           handleClose={setShowModalEdit}
-          // editData={editData}
+          editData={editDataSocialById}
           id={id}
+          postValue={post}
         />
       ) : (
         <></>

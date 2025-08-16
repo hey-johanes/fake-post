@@ -48,9 +48,19 @@ export function CardProvider({ children }) {
     }
   };
 
-  const editById = async (id, data) => {
+  const editDataById = async (id, data) => {
     try {
       await axios.patch(`${POST_URL}/${id}`, data);
+      getDataById();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const editDataSocialById = async (id, data) => {
+    try {
+      await axios.patch(`${POST_URL}/${id}`, data);
+      fetchDataAll();
     } catch (error) {
       console.log(error);
     }
@@ -63,7 +73,8 @@ export function CardProvider({ children }) {
     getDataById,
     fetchDataAll,
     deleteDataSocialById,
-    editById,
+    editDataById,
+    editDataSocialById,
   };
 
   return <CardContext.Provider value={value}>{children}</CardContext.Provider>;

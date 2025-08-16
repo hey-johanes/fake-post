@@ -9,10 +9,13 @@ import {
 } from 'react-bootstrap';
 import ModalsDeletePost from '../modals/ModalsDeletePost';
 import ModalsEditPost from '../modals/ModalsEditPost';
+import { useCardContext } from '../../context/CardContext';
 
 export default function CardItem({ id, username, post }) {
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
+
+  const { deletebyId, editDataById } = useCardContext();
 
   return (
     <div className="col-md-4 mb-4">
@@ -21,6 +24,7 @@ export default function CardItem({ id, username, post }) {
           show={showModalDelete}
           handleClose={setShowModalDelete}
           id={id}
+          deletebyId={deletebyId}
         />
       ) : (
         <></>
@@ -29,8 +33,9 @@ export default function CardItem({ id, username, post }) {
         <ModalsEditPost
           show={showModalEdit}
           setShowModalEdit={setShowModalEdit}
-          // editData={editData}
+          editData={editDataById}
           id={id}
+          postValue={post}
         />
       ) : (
         <></>

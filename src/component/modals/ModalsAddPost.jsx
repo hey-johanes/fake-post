@@ -43,14 +43,7 @@ export default function ModalsAddPost({ show, setShow, onsuccessAddData }) {
           <Form id="formAdd" onSubmit={handleSubmit}>
             <FormGroup>
               <Form.Label>Username</Form.Label>
-              <Form.Control
-                type="text"
-                value={user.username}
-                placeholder="Input username"
-                maxLength={20}
-                onChange={handleChange}
-                disabled
-              ></Form.Control>
+              <Form.Control value={user.username} disabled></Form.Control>
             </FormGroup>
             <FormGroup>
               <Form.Label>Post</Form.Label>
