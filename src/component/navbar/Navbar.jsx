@@ -15,7 +15,9 @@ export default function Header() {
     <>
       <Navbar className="d-block" sticky="top" bg="dark" variant="dark">
         <Container className="d-flex">
-          <Navbar.Brand className="text-light">Fake Post</Navbar.Brand>
+          <Navbar.Brand className="text-light" href="/dashboard">
+            Fake Post
+          </Navbar.Brand>
           <Nav className="text-light">
             <Nav.Link href="/dashboard" className="text-light">
               Dashboard
