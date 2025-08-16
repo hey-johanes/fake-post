@@ -11,7 +11,7 @@ export default function Features() {
 
   return (
     <div style={{ marginTop: '80px', minHeight: '80vh' }}>
-      <div className="m-5 container">
+      <div className="container">
         <div className="row">
           {datas.map((data) => (
             <CardItemSocial

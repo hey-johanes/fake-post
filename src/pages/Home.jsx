@@ -29,7 +29,7 @@ export default function Home() {
             Add Post
           </Button>
         </div>
-        <div className="m-5 container">
+        <div className="mt-5 container">
           <div className="row">
             {datas.map((data) => (
               <CardItem
