@@ -2,11 +2,13 @@ import axios from 'axios';
 import { useContext, createContext, useState, useCallback } from 'react';
 import { useAuthContext } from './AuthContext';
 import { POST_URL } from '../config/config';
+import ModalsError from '../component/modals/ModalsError';
 
 const CardContext = createContext();
 
 export function CardProvider({ children }) {
   const [datas, setDatas] = useState([]);
+  const [show, setShow] = useState(false);
 
   const { user } = useAuthContext();
 
@@ -16,9 +18,14 @@ export function CardProvider({ children }) {
       const response = await axios.get(`${POST_URL}?userId=${user.id}`);
       setDatas(response.data);
     } catch (error) {
-      console.log(error);
+      setShow(true);
+      <ModalsError
+        messageError="Data gagal dimuat"
+        show={show}
+        setShow={setShow}
+      />;
     }
-  }, [user]);
+  }, [show, user]);
 
   const fetchDataAll = useCallback(async () => {
     if (!user) return;
@@ -26,16 +33,26 @@ export function CardProvider({ children }) {
       const response = await axios.get(POST_URL);
       setDatas(response.data);
     } catch (error) {
-      console.log(error);
+      setShow(true);
+      <ModalsError
+        messageError="Data gagal dimuat"
+        show={show}
+        setShow={setShow}
+      />;
     }
-  }, [user]);
+  }, [user, show]);
 
   const deleteDataSocialById = async (id) => {
     try {
       await axios.delete(`${POST_URL}/${id}`);
       fetchDataAll();
     } catch (error) {
-      console.log(error);
+      setShow(true);
+      <ModalsError
+        messageError="Data gagal di hapus"
+        show={show}
+        setShow={setShow}
+      />;
     }
   };
 
@@ -44,7 +61,12 @@ export function CardProvider({ children }) {
       await axios.delete(`${POST_URL}/${id}`);
       getDataById();
     } catch (error) {
-      console.log(error);
+      setShow(true);
+      <ModalsError
+        messageError="Data gagal dihapus"
+        show={show}
+        setShow={setShow}
+      />;
     }
   };
 
@@ -53,7 +75,12 @@ export function CardProvider({ children }) {
       await axios.patch(`${POST_URL}/${id}`, data);
       getDataById();
     } catch (error) {
-      console.log(error);
+      setShow(true);
+      <ModalsError
+        messageError="Data gagal diubah"
+        show={show}
+        setShow={setShow}
+      />;
     }
   };
 
@@ -62,7 +89,12 @@ export function CardProvider({ children }) {
       await axios.patch(`${POST_URL}/${id}`, data);
       fetchDataAll();
     } catch (error) {
-      console.log(error);
+      setShow(true);
+      <ModalsError
+        messageError="Data gagal diubah"
+        show={show}
+        setShow={setShow}
+      />;
     }
   };
 
