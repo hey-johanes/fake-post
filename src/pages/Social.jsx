@@ -3,7 +3,7 @@ import { useCardContext } from '../context/CardContext';
 import CardItemSocial from '../component/card/CardItemSocial';
 
 export default function Features() {
-  const { fetchDataAll, datas, deleteDataOnSOcialPage } = useCardContext();
+  const { fetchDataAll, datas } = useCardContext();
 
   useEffect(() => {
     fetchDataAll();
@@ -19,7 +19,6 @@ export default function Features() {
               id={data.id}
               username={data.username}
               post={data.post}
-              deleteData={deleteDataOnSOcialPage}
             />
           ))}
         </div>

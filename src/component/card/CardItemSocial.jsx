@@ -10,18 +10,20 @@ import { useAuthContext } from '../../context/AuthContext';
 import ModalsDeletePost from '../modals/ModalsDeletePost';
 import { useState } from 'react';
 import ModalsEditPost from '../modals/ModalsEditPost';
+import { useCardContext } from '../../context/CardContext';
 
-export default function CardItemSocial({ id, username, post, deleteData }) {
+export default function CardItemSocial({ id, username, post }) {
   const { user } = useAuthContext();
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
+  const { deleteDataSocialById } = useCardContext();
   return (
     <div className="col-md-4 mb-4">
       {showModalDelete ? (
         <ModalsDeletePost
           show={showModalDelete}
           handleClose={setShowModalDelete}
-          deleteData={deleteData}
+          deleteData={deleteDataSocialById}
           id={id}
         />
       ) : (
