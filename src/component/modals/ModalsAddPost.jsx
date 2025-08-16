@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Modal, Button, Form, FormGroup } from 'react-bootstrap';
 import { useAuthContext } from '../../context/AuthContext';
+import { POST_URL } from '../../config/config';
 
 const initialField = {
   username: '',
@@ -23,7 +24,7 @@ export default function ModalsAddPost({ show, setShow, onsuccessAddData }) {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      await axios.post('http://localhost:1234/post', field);
+      await axios.post(POST_URL, field);
       setField(initialField);
       onsuccessAddData();
       setShow(false);
