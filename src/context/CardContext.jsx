@@ -10,7 +10,7 @@ export function CardProvider({ children }) {
 
   const { user } = useAuthContext();
 
-  const fetchData = useCallback(async () => {
+  const getDataById = useCallback(async () => {
     if (!user) return;
     try {
       const response = await axios.get(`${POST_URL}?userId=${user.id}`);
@@ -42,7 +42,7 @@ export function CardProvider({ children }) {
   const deleteData = async (id) => {
     try {
       await axios.delete(`${POST_URL}/${id}`);
-      fetchData();
+      getDataById();
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +52,7 @@ export function CardProvider({ children }) {
     datas,
     setDatas,
     deleteData,
-    fetchData,
+    getDataById,
     fetchDataAll,
     deleteDataOnSOcialPage,
   };

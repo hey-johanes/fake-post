@@ -6,11 +6,11 @@ import { useCardContext } from '../context/CardContext';
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
-  const { datas, deleteData, fetchData } = useCardContext();
+  const { datas, getDataById } = useCardContext();
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    getDataById();
+  }, [getDataById]);
 
   return (
     <div>
@@ -18,7 +18,7 @@ export default function Home() {
         <ModalsAddPost
           show={showModal}
           setShow={setShowModal}
-          onsuccessAddData={fetchData}
+          onsuccessAddData={getDataById}
         />
       ) : (
         <></>
@@ -37,7 +37,6 @@ export default function Home() {
                 id={data.id}
                 username={data.username}
                 post={data.post}
-                deleteData={deleteData}
               />
             ))}
           </div>
