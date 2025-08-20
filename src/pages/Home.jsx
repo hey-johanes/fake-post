@@ -35,6 +35,7 @@ export default function Home() {
               <CardItem
                 key={data.id}
                 id={data.id}
+                showAction={true}
                 username={data.username}
                 post={data.post}
               />

@@ -11,7 +11,7 @@ import ModalsDeletePost from '../modals/ModalsDeletePost';
 import ModalsEditPost from '../modals/ModalsEditPost';
 import { useCardContext } from '../../context/CardContext';
 
-export default function CardItem({ id, username, post }) {
+export default function CardItem({ id, username, post, showAction }) {
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
 
@@ -43,11 +43,19 @@ export default function CardItem({ id, username, post }) {
       <Card>
         <CardHeader className="d-flex align-items-center justify-content-between">
           <CardTitle>{username}</CardTitle>
-          <Trash onClick={() => setShowModalDelete(true)} />
+          {showAction ? (
+            <Trash onClick={() => setShowModalDelete(true)} />
+          ) : (
+            <></>
+          )}
         </CardHeader>
         <CardBody className="d-flex align-items-center justify-content-between">
           <CardText>{post}</CardText>
-          <Pencil onClick={() => setShowModalEdit(true)} />
+          {showAction ? (
+            <Pencil onClick={() => setShowModalEdit(true)} />
+          ) : (
+            <></>
+          )}
         </CardBody>
       </Card>
     </div>

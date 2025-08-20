@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useCardContext } from '../context/CardContext';
-import CardItemSocial from '../component/card/CardItemSocial';
+import CardItem from '../component/card/CardItem';
+import { useAuthContext } from '../context/AuthContext';
 
 export default function Features() {
   const { fetchDataAll, datas } = useCardContext();
-
+  const { user } = useAuthContext();
   useEffect(() => {
     fetchDataAll();
   }, [fetchDataAll]);
@@ -14,9 +15,10 @@ export default function Features() {
       <div className="container">
         <div className="row">
           {datas.map((data) => (
-            <CardItemSocial
+            <CardItem
               key={data.id}
               id={data.id}
+              showAction={user.username === data.username}
               username={data.username}
               post={data.post}
             />
