@@ -18,6 +18,7 @@ export default function Features() {
             <CardItem
               key={data.id}
               id={data.id}
+              ishome={false}
               showAction={user.username === data.username}
               username={data.username}
               post={data.post}
