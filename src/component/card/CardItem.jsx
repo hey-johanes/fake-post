@@ -9,51 +9,40 @@ import {
 } from 'react-bootstrap';
 import ModalsDeletePost from '../modals/ModalsDeletePost';
 import ModalsEditPost from '../modals/ModalsEditPost';
-import { useCardContext } from '../../context/CardContext';
 
-export default function CardItem({ id, username, post, showAction, ishome }) {
+export default function CardItem({
+  id,
+  username,
+  post,
+  showAction,
+  onEdit,
+  onDelete,
+}) {
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
-  const {
-    deletebyId,
-    editDatasById,
-    deleteDataSocialById,
-    editDataSocialById,
-  } = useCardContext();
 
   return (
     <div className="col-md-4 mb-4">
-      {showModalDelete && ishome ? (
+      {showModalDelete ? (
         <ModalsDeletePost
           show={showModalDelete}
           handleClose={setShowModalDelete}
           id={id}
-          deletebyId={deletebyId}
+          deletebyId={onDelete}
         />
       ) : (
-        <ModalsDeletePost
-          show={showModalDelete}
-          handleClose={setShowModalDelete}
-          id={id}
-          deletebyId={deleteDataSocialById}
-        />
+        <></>
       )}
-      {showModalDelete && ishome ? (
+      {showModalDelete ? (
         <ModalsEditPost
           show={showModalEdit}
           setShowModalEdit={setShowModalEdit}
-          editData={editDatasById}
+          editData={onEdit}
           id={id}
           postValue={post}
         />
       ) : (
-        <ModalsEditPost
-          show={showModalEdit}
-          setShowModalEdit={setShowModalEdit}
-          editData={editDataSocialById}
-          id={id}
-          postValue={post}
-        />
+        <></>
       )}
       <Card>
         <CardHeader className="d-flex align-items-center justify-content-between">

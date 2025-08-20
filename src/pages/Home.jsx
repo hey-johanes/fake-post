@@ -6,7 +6,7 @@ import { useCardContext } from '../context/CardContext';
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
-  const { datas, getDataById } = useCardContext();
+  const { datas, getDataById, deletebyId, editDatasById } = useCardContext();
 
   useEffect(() => {
     getDataById();
@@ -35,7 +35,8 @@ export default function Home() {
               <CardItem
                 key={data.id}
                 id={data.id}
-                ishome={true}
+                onDelete={deletebyId}
+                onEdit={editDatasById}
                 showAction={true}
                 username={data.username}
                 post={data.post}
