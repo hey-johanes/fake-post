@@ -1,8 +1,12 @@
-import axios from 'axios';
 import { useContext, createContext, useState, useCallback } from 'react';
 import { useAuthContext } from './AuthContext';
-import { POST_URL } from '../config/config';
 import ModalsError from '../component/modals/ModalsError';
+import {
+  getDatasById,
+  getAllData,
+  deleteDataById,
+  editDataById,
+} from '../services/PostService';
 
 const CardContext = createContext();
 
@@ -15,7 +19,7 @@ export function CardProvider({ children }) {
   const getDataById = useCallback(async () => {
     if (!user) return;
     try {
-      const response = await axios.get(`${POST_URL}?userId=${user.id}`);
+      const response = await getDatasById(user.id);
       setDatas(response.data);
     } catch (error) {
       setShow(true);
@@ -30,7 +34,7 @@ export function CardProvider({ children }) {
   const fetchDataAll = useCallback(async () => {
     if (!user) return;
     try {
-      const response = await axios.get(POST_URL);
+      const response = await getAllData();
       setDatas(response.data);
     } catch (error) {
       setShow(true);
@@ -44,7 +48,7 @@ export function CardProvider({ children }) {
 
   const deleteDataSocialById = async (id) => {
     try {
-      await axios.delete(`${POST_URL}/${id}`);
+      await deleteDataById(id);
       fetchDataAll();
     } catch (error) {
       setShow(true);
@@ -58,7 +62,7 @@ export function CardProvider({ children }) {
 
   const deletebyId = async (id) => {
     try {
-      await axios.delete(`${POST_URL}/${id}`);
+      await deleteDataById(id);
       getDataById();
     } catch (error) {
       setShow(true);
@@ -70,9 +74,9 @@ export function CardProvider({ children }) {
     }
   };
 
-  const editDataById = async (id, data) => {
+  const editDatasById = async (id, data) => {
     try {
-      await axios.patch(`${POST_URL}/${id}`, data);
+      await editDataById(id, data);
       getDataById();
     } catch (error) {
       setShow(true);
@@ -86,7 +90,7 @@ export function CardProvider({ children }) {
 
   const editDataSocialById = async (id, data) => {
     try {
-      await axios.patch(`${POST_URL}/${id}`, data);
+      await editDataById(id, data);
       fetchDataAll();
     } catch (error) {
       setShow(true);
@@ -105,7 +109,7 @@ export function CardProvider({ children }) {
     getDataById,
     fetchDataAll,
     deleteDataSocialById,
-    editDataById,
+    editDatasById,
     editDataSocialById,
   };
 
