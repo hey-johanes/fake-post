@@ -1,10 +1,8 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import ModalsLogin from '../modals/ModalsLogin';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthContext';
-import { USER_URL } from '../../config/config';
-
+import { getUserLogin } from '../../services/UserService';
 const initialField = {
   username: '',
   password: '',
@@ -29,9 +27,7 @@ const LoginForm = () => {
   async function handleLogin(e) {
     e.preventDefault();
     try {
-      const response = await axios.get(
-        `${USER_URL}?username=${field.username}&password=${field.password}`
-      );
+      const response = await getUserLogin(field.username, field.password);
       const findUsers = response.data[0];
       if (findUsers) {
         setFound(true);
