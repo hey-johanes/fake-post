@@ -37,6 +37,7 @@ export default function Home() {
                 id={data.id}
                 onDelete={deletebyId}
                 onEdit={editDatasById}
+                refreshFn={getDataById}
                 showAction={true}
                 username={data.username}
                 post={data.post}

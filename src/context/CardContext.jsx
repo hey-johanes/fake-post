@@ -46,24 +46,10 @@ export function CardProvider({ children }) {
     }
   }, [user, show]);
 
-  const deleteDataSocialById = async (id) => {
+  const deletebyId = async (id, refreshFn) => {
     try {
       await deleteDataById(id);
-      fetchDataAll();
-    } catch (error) {
-      setShow(true);
-      <ModalsError
-        messageError="Data gagal di hapus"
-        show={show}
-        setShow={setShow}
-      />;
-    }
-  };
-
-  const deletebyId = async (id) => {
-    try {
-      await deleteDataById(id);
-      getDataById();
+      refreshFn();
     } catch (error) {
       setShow(true);
       <ModalsError
@@ -74,24 +60,10 @@ export function CardProvider({ children }) {
     }
   };
 
-  const editDatasById = async (id, data) => {
+  const editDatasById = async (id, data, refreshFn) => {
     try {
       await editDataById(id, data);
-      getDataById();
-    } catch (error) {
-      setShow(true);
-      <ModalsError
-        messageError="Data gagal diubah"
-        show={show}
-        setShow={setShow}
-      />;
-    }
-  };
-
-  const editDataSocialById = async (id, data) => {
-    try {
-      await editDataById(id, data);
-      fetchDataAll();
+      refreshFn();
     } catch (error) {
       setShow(true);
       <ModalsError
@@ -108,9 +80,7 @@ export function CardProvider({ children }) {
     deletebyId,
     getDataById,
     fetchDataAll,
-    deleteDataSocialById,
     editDatasById,
-    editDataSocialById,
   };
 
   return <CardContext.Provider value={value}>{children}</CardContext.Provider>;

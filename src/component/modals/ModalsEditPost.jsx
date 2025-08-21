@@ -8,6 +8,7 @@ export default function ModalsEditPost({
   id,
   editData,
   postValue,
+  refreshFn,
 }) {
   const { user } = useAuthContext();
 
@@ -27,7 +28,7 @@ export default function ModalsEditPost({
 
   const handleEditCard = (e) => {
     e.preventDefault();
-    editData(id, field);
+    editData(id, field, refreshFn);
     setShowModalEdit(false);
   };
 

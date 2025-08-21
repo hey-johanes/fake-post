@@ -4,8 +4,7 @@ import CardItem from '../component/card/CardItem';
 import { useAuthContext } from '../context/AuthContext';
 
 export default function Features() {
-  const { fetchDataAll, datas, deleteDataSocialById, editDataSocialById } =
-    useCardContext();
+  const { fetchDataAll, datas, deletebyId, editDatasById } = useCardContext();
 
   const { user } = useAuthContext();
   useEffect(() => {
@@ -21,11 +20,12 @@ export default function Features() {
               key={data.id}
               id={data.id}
               ishome={false}
-              onDelete={deleteDataSocialById}
-              onEdit={editDataSocialById}
+              onDelete={deletebyId}
+              onEdit={editDatasById}
               showAction={user.username === data.username}
               username={data.username}
               post={data.post}
+              refreshFn={fetchDataAll}
             />
           ))}
         </div>

@@ -17,6 +17,7 @@ export default function CardItem({
   showAction,
   onEdit,
   onDelete,
+  refreshFn,
 }) {
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
@@ -28,15 +29,17 @@ export default function CardItem({
           show={showModalDelete}
           handleClose={setShowModalDelete}
           id={id}
+          refreshFn={refreshFn}
           deletebyId={onDelete}
         />
       ) : (
         <></>
       )}
-      {showModalDelete ? (
+      {showModalEdit ? (
         <ModalsEditPost
           show={showModalEdit}
           setShowModalEdit={setShowModalEdit}
+          refreshFn={refreshFn}
           editData={onEdit}
           id={id}
           postValue={post}
