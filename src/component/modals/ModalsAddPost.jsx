@@ -19,6 +19,7 @@ export default function ModalsAddPost({ show, setShow, onsuccessAddData }) {
       [name]: value,
       userId: user.id,
       username: user.username,
+      likes: 0,
     });
   };
   const handleSubmit = async (e) => {

@@ -41,6 +41,7 @@ export default function Home() {
                 showAction={true}
                 username={data.username}
                 post={data.post}
+                like={data.likes}
               />
             ))}
           </div>

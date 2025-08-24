@@ -74,6 +74,19 @@ export function CardProvider({ children }) {
     }
   };
 
+  const likePost = async (id, data) => {
+    try {
+      await editDataById(id, data);
+    } catch (error) {
+      setShow(true);
+      <ModalsError
+        messageError="Data gagal diubah"
+        show={show}
+        setShow={setShow}
+      />;
+    }
+  };
+
   const value = {
     datas,
     setDatas,
@@ -81,6 +94,7 @@ export function CardProvider({ children }) {
     getDataById,
     fetchDataAll,
     editDatasById,
+    likePost,
   };
 
   return <CardContext.Provider value={value}>{children}</CardContext.Provider>;

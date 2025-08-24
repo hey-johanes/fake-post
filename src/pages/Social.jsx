@@ -26,6 +26,7 @@ export default function Features() {
               username={data.username}
               post={data.post}
               refreshFn={fetchDataAll}
+              like={data.likes}
             />
           ))}
         </div>
