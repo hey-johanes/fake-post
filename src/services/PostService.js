@@ -16,3 +16,7 @@ export const deleteDataById = (id) => {
 export const editDataById = (id, data) => {
   return axios.patch(`${POST_URL}/${id}`, data);
 };
+
+export const updateLikeData = (id, likes) => {
+  return axios.patch(`${POST_URL}/${id}`, likes);
+};
